@@ -1,27 +1,16 @@
-import React, { useState } from "react";
+const GameBoard = ({handleSelectSquare, gameTurns, initialGameBoard}) => {
 
-const GameBoard = () => {
-  const initialGameBoard = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-  ];
+  let gameBoard = initialGameBoard;
 
-  // here we are using nested arrays
-  // so in order to get the access of array which is inside the array,, we need to use 2 map method.
-
-  const [gameBoard, setGameBoard] = useState(initialGameBoard);
-
-  const handleClick = (rowIndex, rowElementindex) => {
-    
-    setGameBoard((preVal) => {
-           const updatedBoard = [...preVal.map((innerArray) => [...innerArray])]  // it creates a new array, its called immutable. rather than changing the original array, we are creating a new array, in which we can update the original array.
-           updatedBoard[rowIndex][rowElementindex] = "X"
-           return updatedBoard;
-        }
-    );
+  for(const turn of gameTurns) {
+    const {square, player} = turn;
+    const {rowIndex, rowElementIndex} = square;
+    gameBoard[rowIndex][rowElementIndex] = player;
   }
-//   gameBoard[rowIndex][rowElementindex] = "X"
+
+  //  here we are using nested arrays
+  //  so in order to get the access of array which is inside the array,, we need to use 2 map method.
+
   return (
     <ol id="game-board">
       {gameBoard.map((row, rowIndex) => {
@@ -30,14 +19,13 @@ const GameBoard = () => {
           
             <li key={rowIndex}>
               <ol>
-                {row.map((rowElement, rowElementindex) => {
+                {row.map((rowElement, rowElementIndex) => {
                   // second map to have an access to the three elements which are inside the row
                   return (
                   
-                      <li key={rowElementindex}>
-                        <button onClick={() => handleClick(rowIndex, rowElementindex)}>{rowElement}</button>
-                      </li>
-                 
+                      <li key={rowElementIndex}>
+                        <button onClick={() => handleSelectSquare(rowIndex, rowElementIndex)}>{rowElement}</button>
+                      </li>                 
                   );
                 })}
               </ol>

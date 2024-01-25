@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Player = ({ name, symbol }) => {
+const Player = ({ name, symbol, activePlayer }) => {
   const [toggleEditButton, setToggleEditButton] = useState(false); // works for both the toggle button and the input as well 
   const [editInput, setEditInput] = useState(name);
 
@@ -15,7 +15,7 @@ const Player = ({ name, symbol }) => {
   };
 
   return (
-    <li>
+    <li className={activePlayer ? "active" : undefined}>
       <span className="player">
         {toggleEditButton ? (
           <input type="text" placeholder={editInput} value={editInput} onChange={handleInput} /> // its called a two way binding. we are editing the existing value of the input and getting it saved as well. 

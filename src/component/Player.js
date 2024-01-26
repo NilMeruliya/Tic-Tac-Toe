@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 
-const Player = ({ name, symbol, activePlayer }) => {
+const Player = ({ name, symbol, activePlayer, setPlayerName}) => {
   const [toggleEditButton, setToggleEditButton] = useState(false); // works for both the toggle button and the input as well 
   const [editInput, setEditInput] = useState(name);
 
   const handleEditButton = () => {
     setToggleEditButton(!toggleEditButton);
+    setPlayerName(editInput)
   };
 
   const handleInput = (e) => {

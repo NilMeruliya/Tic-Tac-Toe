@@ -11,7 +11,9 @@ function App() {
   const [activePlayer, setActivePlayer] = useState("X"); // it is used in Player and GAMEBOARD component.
 
   const [gameTurns, setGameTurns] = useState([]); // it is used in GAMEBOARD and LOG component.
-  // const [hasWinner, setHasWinner] = useState(false);
+
+  const [player1Name, setPlayer1Name] = useState("Player 1");
+  const [player2Name, setPlayer2Name] = useState("Player 2");
 
   const initialGameBoard = [
     [null, null, null],
@@ -92,18 +94,20 @@ function App() {
         <div id="game-container">
           <ol id="players" className="highlight-player">
             <Player
-              name="Player 1"
+              name={player1Name}
               symbol="X"
               activePlayer={activePlayer === "X"}
+              setPlayerName={setPlayer1Name}
             />
             <Player
-              name="Player 2"
+              name={player2Name}
               symbol="0"
               activePlayer={activePlayer === "0"}
+              setPlayerName={setPlayer2Name}
             />
           </ol>
 
-          {(winner || hasDraw) &&  <GameOver winner={winner} restartBtn={restartBtn}/>}
+          {(winner || hasDraw) &&  <GameOver winner={winner} restartBtn={restartBtn} player1Name={player1Name} player2Name={player2Name}/>}
 
           <GameBoard
             handleSelectSquare={handleSelectSquare}

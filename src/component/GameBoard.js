@@ -1,12 +1,5 @@
-const GameBoard = ({handleSelectSquare, gameTurns, initialGameBoard}) => {
+const GameBoard = ({handleSelectSquare, gameBoard}) => {
 
-  let gameBoard = initialGameBoard;
-
-  for(const turn of gameTurns) {
-    const {square, player} = turn;
-    const {rowIndex, rowElementIndex} = square;
-    gameBoard[rowIndex][rowElementIndex] = player;
-  }
 
   //  here we are using nested arrays
   //  so in order to get the access of array which is inside the array,, we need to use 2 map method.
@@ -24,13 +17,15 @@ const GameBoard = ({handleSelectSquare, gameTurns, initialGameBoard}) => {
                   return (
                   
                       <li key={rowElementIndex}>
-                        <button onClick={() => handleSelectSquare(rowIndex, rowElementIndex)}>{rowElement}</button>
+                        <button 
+                        onClick={() => handleSelectSquare(rowIndex, rowElementIndex)}
+                        disabled={rowElement != null}
+                        >{rowElement}</button>
                       </li>                 
                   );
                 })}
               </ol>
-            </li>
-          
+            </li>         
         );
       })}
     </ol>
